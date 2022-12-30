@@ -2,13 +2,17 @@
 
 <ul class="heroes">
   <li *ngFor="let hero of heroes">
+    <a routerLink="/detail/{{hero.id}}">
+      <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </a>
+  </li>
+</ul>
+
+<!-- <ul class="heroes">
+  <li *ngFor="let hero of heroes">
     <button [class.selected]="hero === selectedHero" type="button" (click)="onSelect(hero)">
       <span class="badge">{{hero.id}}</span>
       <span class="name">{{hero.name}}</span>
     </button>
   </li>
-</ul>
-
-<!-- The HeroDetailComponent selector is 'app-hero-detail', bind to hero property -->
-<!-- when the user clicks a hero in the list, the selectedHero changes. When the selectedHero changes, the property binding updates hero and the HeroDetailComponent displays the new hero. -->
-<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+</ul> -->
