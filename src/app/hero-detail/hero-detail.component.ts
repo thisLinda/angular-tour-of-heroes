@@ -7,8 +7,14 @@ import { Hero } from '../hero';
   templateUrl: './hero-detail.component.html',
   styleUrls: ['./hero-detail.component.css'],
 })
-export class HeroDetailComponent {
+export class HeroDetailComponent implements OnInit {
   // The hero property must be an Input property, annotated with the @Input() decorator, because the external HeroesComponent binds to it like this.
   // This component only receives a hero object through its hero property and displays it in HTML
   @Input() hero?: Hero;
+
+  constructor() {}
+
+  ngOnInit(): void {
+      
+  }
 }
