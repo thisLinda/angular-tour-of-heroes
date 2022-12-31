@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
-import { MessageService } from '../message.service';
+// import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-heroes',
@@ -21,8 +21,7 @@ export class HeroesComponent implements OnInit {
   // While you could call getHeroes() in the constructor, that's not the best practice.Reserve the constructor for minimal initialization such as wiring constructor parameters to properties. The constructor shouldn't do anything. It certainly shouldn't call a function that makes HTTP requests to a remote server as a real data service would.
 
   constructor(
-    private heroService: HeroService,
-    private messageService: MessageService
+    private heroService: HeroService // private messageService: MessageService
   ) {}
 
   // ngOnInit is a lifecycle hook
@@ -38,7 +37,29 @@ export class HeroesComponent implements OnInit {
   // In this tutorial, HeroService.getHeroes() returns an Observable so that it can use the Angular HttpClient.get method to fetch the heroes and have HttpClient.get() return an Observable.
   // Waits for the Observable to emit the array of heroes, which could happen now or several minutes from now. The subscribe() method passes the emitted array to the callback, which sets the component's heroes property.This asynchronous approach works when the HeroService requests heroes from the server.
 
+  onKeydown(event) {
+    console.log(event);
+  }
+  // onKeydown(event) {
+  //   console.log(event);
+  // }
+
   getHeroes(): void {
     this.heroService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
+  }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) {
+      return;
+    }
+    this.heroService.addHero({ name } as Hero).subscribe((hero) => {
+      this.heroes.push(hero);
+    });
+  }
+
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter((h) => h !== hero);
+    this.heroService.deleteHero(hero.id).subscribe();
   }
 }

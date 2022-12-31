@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -14,7 +14,7 @@ import { HeroService } from '../hero.service';
 export class HeroDetailComponent implements OnInit {
   // The hero property must be an Input property, annotated with the @Input() decorator, because the external HeroesComponent binds to it like this.
   // This component only receives a hero object through its hero property and displays it in HTML
-  @Input() hero?: Hero;
+  hero: Hero | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,12 +27,17 @@ export class HeroDetailComponent implements OnInit {
   }
 
   getHero(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.heroService.getHero(id)
-      .subscribe(hero=> this.hero = hero);
+    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
+    this.heroService.getHero(id).subscribe((hero) => (this.hero = hero));
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  save(): void {
+    if (this.hero) {
+      this.heroService.updateHero(this.hero).subscribe(() => this.goBack());
+    }
   }
 }

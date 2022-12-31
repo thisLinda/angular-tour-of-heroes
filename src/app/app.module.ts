@@ -12,28 +12,28 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroesComponent } from './heroes/heroes.component';
+import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
     HeroesComponent,
     HeroDetailComponent,
-    MessagesComponent,
-    DashboardComponent,
+    HeroSearchComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    HttpClientInMemoryWebApiModule,
+    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests and returns simulated server responses.Remove it when a real server is ready to receive requests
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
+      dataEncapsulation: false,
+    }),
   ],
-  providers: [InMemoryDataService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-
-HttpClientInMemoryWebApiModule.forRoot(
-  InMemoryDataService, { dataEncapsulation: false }
-)
