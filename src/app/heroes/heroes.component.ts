@@ -37,9 +37,6 @@ export class HeroesComponent implements OnInit {
   // In this tutorial, HeroService.getHeroes() returns an Observable so that it can use the Angular HttpClient.get method to fetch the heroes and have HttpClient.get() return an Observable.
   // Waits for the Observable to emit the array of heroes, which could happen now or several minutes from now. The subscribe() method passes the emitted array to the callback, which sets the component's heroes property.This asynchronous approach works when the HeroService requests heroes from the server.
 
-  onKeydown(event) {
-    console.log(event);
-  }
   // onKeydown(event) {
   //   console.log(event);
   // }
