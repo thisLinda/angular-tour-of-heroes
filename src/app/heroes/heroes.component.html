@@ -2,11 +2,9 @@
 
 <form>
   <div>
-    <label for="new-hero">Hero name: </label>
+    <label for="new-hero">Hero Name: </label>
     <input id="new-hero" type="text" name="new-hero" #heroName />
-    <button type="submit" class="add-button" (click)="add(heroName.value); heroName.value=''">
-      Add hero
-    </button>
+    <input type="submit" class="add-button" value="Add New Hero!" (click)="add(heroName.value); heroName.value=''">
   </div>
 </form>
 
